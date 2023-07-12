@@ -1,0 +1,3 @@
+export VIVADO_HOME="/media/grffn/557c7bf1-31ed-461a-b94e-498968d6f257/grffn/software/xilinx/Vivado/2022.2"
+export XPU_HOME="$HOME/.xpu"
+alias xrt-cross='sudo docker run --rm -it -v "$(pwd):/srcdir" -v "$VIVADO_HOME:/vivado" serbuvlad/xrt-cross'

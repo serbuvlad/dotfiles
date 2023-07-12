@@ -1,0 +1,5 @@
+export GOBIN="$HOME/.local/bin"
+export GOPATH="$HOME/.local/share/go"
+export GOMODCACHE="$HOME/.config/go/mod"
+
+export PATH="$PATH:$HOME/opt/go/bin"
