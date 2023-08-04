@@ -1,0 +1,16 @@
+import = [
+  "/etc/xdg/alacritty/colors.toml",
+  "/etc/xdg/alacritty/font.toml",
+]
+
+shell = "tmux"
+
+[font]
+size = 7.5
+
+[window.padding]
+x = 5
+y = 5
+
+[scrolling]
+history = 0

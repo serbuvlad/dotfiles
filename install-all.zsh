@@ -9,33 +9,12 @@ function p() {
 	fi
 }
 
-function install-kitty() {
-	p 'Installing the kitty terminal'
-
-	if [ -d "${HOME}/opt/kitty.app" ]
-	then
-		p 'Removing old kitty install'
-		rm -r "${HOME}/opt/kitty.app"
-	fi
-
-	# Installation documented at https://sw.kovidgoyal.net/kitty/binary/
-
-	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin \
-		dest="${HOME}/opt" launch=n
-
-	cp ~/opt/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-	cp ~/opt/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-
-	sed -i "s|Icon=kitty|Icon=${HOME}/opt/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-	sed -i "s|Exec=kitty|Exec=${HOME}/opt/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-}
-
 function install-scripts() {
 	p 'Installing scripts'
 
 	mkdir -p "${HOME}/bin"
 
-	rsync -a bin/ "${HOME}/bin"
+	rsync -avv bin/ "${HOME}/bin"
 }
 
 function install-yt-dlp() {
@@ -53,7 +32,7 @@ function install-zshrc() {
 
 	mkdir -p "${HOME}/.zshrc.d"
 
-	rsync -a .zshrc.d/ "${HOME}/.zshrc.d"
+	rsync -avv .zshrc.d/ "${HOME}/.zshrc.d"
 
 	if ! grep -Eq '^# Source .zshrc.d files$' "${HOME}/.zshrc"
 	then
@@ -68,18 +47,24 @@ done
 	fi
 }
 
-function install-config-kitty() {
-	p 'Installing config for kitty'
+function install-config-alacritty() {
+	p 'Installing config for alacritty'
 
-	rsync -a .config/kitty/ "${HOME}/.config/kitty"
+	sudo mkdir -p /etc/xdg/alacritty
+
+	if [ -f /etc/xdg/alacritty/alacritty.yml ]
+	then
+		sudo rm /etc/xdg/alacritty/alacritty.yml
+	fi
+
+	sudo rsync -avv etc/xdg/alacritty/ /etc/xdg/alacritty
 }
 
 function install-config-all() {
-	install-config-kitty
+	install-config-alacritty
 }
 
 function install-all() {
-	install-kitty
 	install-scripts
 	install-yt-dlp
 	install-zshrc
