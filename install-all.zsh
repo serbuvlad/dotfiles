@@ -9,6 +9,8 @@ function p() {
 	fi
 }
 
+
+
 function install-scripts() {
 	p 'Installing scripts'
 
@@ -32,7 +34,7 @@ function install-zshrc() {
 
 	mkdir -p "${HOME}/.zshrc.d"
 
-	rsync -avv .zshrc.d/ "${HOME}/.zshrc.d"
+	rsync -avv zshrc.d/ "${HOME}/.zshrc.d"
 
 	if ! grep -Eq '^# Source .zshrc.d files$' "${HOME}/.zshrc"
 	then
@@ -60,8 +62,22 @@ function install-config-alacritty() {
 	sudo rsync -avv etc/xdg/alacritty/ /etc/xdg/alacritty
 }
 
+function install-config-tmux() {
+	p 'Installing config for tmux'
+
+	if ! [ -d ~/.config/tmux/plugins/tpm ]
+	then
+		git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+	fi
+
+	rsync -avv config/tmux/ ~/.config/tmux
+
+	tmux source ~/.config/tmux/tmux.conf
+}
+
 function install-config-all() {
 	install-config-alacritty
+	install-config-tmux
 }
 
 function install-all() {
