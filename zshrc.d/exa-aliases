@@ -1,3 +1,0 @@
-alias l='exa --all --group-directories-first'
-alias ll='exa --all --group-directories-first --long --time-style long-iso --group --git --extended'
-alias lt='exa --all --group-directories-first --tree'
