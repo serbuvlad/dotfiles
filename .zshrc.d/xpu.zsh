@@ -1,0 +1,5 @@
+export ARHACC_PATH="${HOME}/work/xpu"
+export XPU_SW_PATH="${ARHACC_PATH}/sw"
+export XPU_HW_PATH="${ARHACC_PATH}/hw"
+export XPU_LIBRARIES_PATH="${ARHACC_PATH}/libraries"
+export XPU_HOME="${HOME}/.xpu"

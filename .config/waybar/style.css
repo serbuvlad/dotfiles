@@ -152,6 +152,30 @@ window#waybar.PCSX2 #window {
 	background: #cf3f61;
 }
 
+#battery {
+  margin-top: 8px;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  transition: none;
+  color: #343935;
+  background: #4c9ad4;
+}
+
+#battery.charging {
+  background: #7bb75b;
+}
+
+#battery.warning {
+  background: #e9b32a;
+}
+
+#battery.critical {
+  background: #cf3f61;
+}
+
 #clock {
 	margin-top: 8px;
 	margin-left: 8px;
